@@ -1,0 +1,93 @@
+<!-- AVALIAÇÃO DE PELE (modal) -->
+<div class="modal" id="skin-quiz-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+  <div class="modal__panel">
+    <div class="modal__header">
+      <div class="modal__header-main">
+        <div class="modal__header-icon"><span class="material-symbols-outlined icon icon--20">auto_awesome</span></div>
+        <div>
+          <h3 class="modal__title" id="modal-title">Avaliação de Cuidados da Pele Atomy</h3>
+          <p class="modal__subtitle">Diagnóstico personalizado com a Elena</p>
+        </div>
+      </div>
+      <button class="modal__close" data-close-skin-quiz type="button" aria-label="Fechar">
+        <span class="material-symbols-outlined icon icon--22">close</span>
+      </button>
+    </div>
+
+    <form class="modal__body" id="skin-assessment-form">
+      <div class="form-section">
+        <h4 class="form-section__title">1. Os seus dados de contacto</h4>
+        <div class="form-grid">
+          <div>
+            <label class="field__label" for="quiz-name">O seu nome completo *</label>
+            <input class="input" id="quiz-name" type="text" placeholder="Ex.: Maria Santos" required>
+          </div>
+          <div>
+            <label class="field__label" for="quiz-phone">WhatsApp / Telemóvel *</label>
+            <input class="input" id="quiz-phone" type="tel" placeholder="Ex.: +351 912 345 678" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section form-section--tight">
+        <h4 class="form-section__title">2. Como sente a sua pele?</h4>
+        <div class="skin-type-grid">
+          <label class="radio-card">
+            <input class="sr-only" type="radio" name="skinType" value="Normal / Equilibrada" checked>
+            <span class="material-symbols-outlined icon icon--22">sentiment_satisfied</span>
+            <span class="radio-card__label">Equilibrada</span>
+          </label>
+          <label class="radio-card">
+            <input class="sr-only" type="radio" name="skinType" value="Seca / Repuxada">
+            <span class="material-symbols-outlined icon icon--22">water_drop</span>
+            <span class="radio-card__label">Seca</span>
+          </label>
+          <label class="radio-card">
+            <input class="sr-only" type="radio" name="skinType" value="Mista (Zona T oleosa)">
+            <span class="material-symbols-outlined icon icon--22">balance</span>
+            <span class="radio-card__label">Mista</span>
+          </label>
+          <label class="radio-card">
+            <input class="sr-only" type="radio" name="skinType" value="Oleosa / Acneica / Sensível">
+            <span class="material-symbols-outlined icon icon--22">flare</span>
+            <span class="radio-card__label">Oleosa / Sensível</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-section form-section--tight">
+        <h4 class="form-section__title">3. Principal objetivo de melhoria</h4>
+        <select class="select" id="quiz-goal">
+          <option value="Hidratação profunda e luminosidade">Hidratação profunda e luminosidade natural</option>
+          <option value="Firmeza, linhas de expressão e anti-idade (Linha CellActive)">Firmeza, linhas de expressão e anti-idade</option>
+          <option value="Uniformização de manchas e tom de pele">Uniformização de manchas e tom de pele</option>
+          <option value="Controlo de oleosidade e poros dilatados">Controlo de oleosidade e poros dilatados</option>
+          <option value="Acalmar vermelhidão e sensibilidade">Acalmar vermelhidão e sensibilidade</option>
+        </select>
+      </div>
+
+      <div class="form-section form-section--tight">
+        <h4 class="form-section__title">4. Que tipo de recomendação Atomy procura?</h4>
+        <select class="select" id="quiz-pref">
+          <option value="Rotina essencial diária (Limpeza + Hidratação + Proteção)">Rotina essencial diária simples (3 passos)</option>
+          <option value="Rotina completa de cuidados coreanos intensivos">Rotina completa coreana intensiva (Ampolas e Essências)</option>
+          <option value="Sugestão de 1 ou 2 produtos para experimentar">Apenas 1 ou 2 produtos-chave para começar</option>
+        </select>
+      </div>
+
+      <div class="modal__footer">
+        <span class="modal__privacy">
+          <span class="material-symbols-outlined icon icon--16 icon--primary">lock</span>
+          <span>Dados enviados com total privacidade à Elena</span>
+        </span>
+        <div class="modal__footer-actions">
+          <button class="btn btn--quiet btn--block-sm" data-close-skin-quiz type="button">Cancelar</button>
+          <button class="btn btn--primary btn--submit btn--block-sm" type="submit">
+            <span class="material-symbols-outlined icon icon--17">send</span>
+            <span>Enviar Avaliação à Elena</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

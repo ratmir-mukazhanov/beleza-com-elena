@@ -1,0 +1,219 @@
+/* ==========================================================================
+   Layout
+   Page shell, content container, section rhythm, site header/footer frames.
+   ========================================================================== */
+
+/* --- Page shell ----------------------------------------------------------- */
+.page {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  padding-top: var(--header-height);
+  background-color: var(--surface);
+}
+
+.page__body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: var(--on-surface);
+}
+
+/* --- Container ------------------------------------------------------------ */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter-mobile);
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-inline: var(--gutter);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-inline: 2rem;
+  }
+}
+
+/* --- Section (container + vertical rhythm) -------------------------------- */
+.section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter-mobile);
+  padding-block: var(--space-xl);
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding-inline: var(--gutter);
+  }
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-block: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-inline: 2rem;
+  }
+}
+
+.section--hero {
+  padding-top: 2rem;
+  padding-bottom: var(--space-xl);
+}
+
+.section--cta {
+  padding-block: 2.5rem;
+}
+
+.section--faq {
+  padding-block: 2.5rem;
+}
+
+.section--disclaimer {
+  display: block;
+  max-width: none;
+  padding: var(--space-md) var(--margin-mobile) var(--space-sm);
+}
+
+@media (min-width: 768px) {
+  .section--hero {
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+  }
+
+  .section--cta {
+    padding-block: 3.5rem;
+  }
+
+  .section--faq {
+    padding-block: 4rem;
+  }
+}
+
+/* --- Site header ---------------------------------------------------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  z-index: 50;
+  width: 100%;
+  background-color: rgb(var(--surface-rgb) / 0.85);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  box-shadow: var(--shadow-header);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: var(--container-max);
+  height: var(--header-height);
+  margin-inline: auto;
+  padding-inline: var(--gutter-mobile);
+}
+
+@media (min-width: 640px) {
+  .site-header__inner {
+    padding-inline: var(--gutter);
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-header__inner {
+    padding-inline: 2rem;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.site-nav {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .site-nav {
+    display: flex;
+  }
+}
+
+.site-nav__link {
+  color: var(--secondary);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.site-nav__link:hover {
+  color: var(--primary);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* --- Site footer ---------------------------------------------------------- */
+.site-footer {
+  margin-top: 4rem;
+  background-color: var(--surface-container-lowest);
+  border-top: 1px solid rgb(var(--outline-variant-rgb) / 0.3);
+}
+
+.site-footer__inner {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: 3rem var(--gutter-mobile);
+}
+
+@media (min-width: 640px) {
+  .site-footer__inner {
+    padding-inline: var(--gutter);
+  }
+}
+
+@media (min-width: 768px) {
+  .site-footer__inner {
+    padding-block: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-footer__inner {
+    padding-inline: 2rem;
+  }
+}
