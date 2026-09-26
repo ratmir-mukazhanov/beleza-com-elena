@@ -1,7 +1,5 @@
 /* ==========================================================================
    Base / reset
-   Minimal, dependency-free reset that mirrors what the old Tailwind Play CDN
-   preflight provided, plus the project's global element defaults.
    ========================================================================== */
 
 *,
@@ -25,16 +23,11 @@ body {
   width: 100%;
   min-height: 100%;
   margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   background-color: var(--surface);
   color: var(--on-surface);
-  font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 24px;
-  letter-spacing: 0;
-  font-weight: 400;
+  font: var(--type-body-md);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior-y: none;
@@ -76,8 +69,7 @@ ol {
 
 img,
 svg,
-video,
-canvas {
+video {
   display: block;
   max-width: 100%;
   height: auto;
@@ -121,11 +113,7 @@ summary::-webkit-details-marker {
   display: none;
 }
 
-/* --- iOS safe-area helpers ------------------------------------------------ */
-.pb-safe {
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
-
+/* --- iOS safe area -------------------------------------------------------- */
 .pt-safe {
   padding-top: env(safe-area-inset-top, 0px);
 }
@@ -155,6 +143,5 @@ summary::-webkit-details-marker {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
   }
 }

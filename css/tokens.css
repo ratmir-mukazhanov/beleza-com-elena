@@ -1,67 +1,30 @@
 /* ==========================================================================
    Design tokens
-   Single source of truth for the "Serene Boutique" design system.
-   Values mirror DESIGN.md and the original Stitch/Tailwind theme config.
+   Only what the page actually uses. Trimmed from the full DESIGN.md palette.
    ========================================================================== */
 
 :root {
-  /* --- Color palette (semantic) ------------------------------------------ */
+  /* --- Colors ------------------------------------------------------------ */
   --surface: #fcf9f8;
-  --surface-dim: #dcd9d9;
-  --surface-bright: #fcf9f8;
   --surface-container-lowest: #ffffff;
   --surface-container-low: #f6f3f2;
   --surface-container: #f0eded;
   --surface-container-high: #eae7e7;
-  --surface-container-highest: #e4e2e1;
-  --surface-variant: #e4e2e1;
-  --surface-tint: #516255;
-
   --on-surface: #1b1c1c;
-  --on-surface-variant: #434843;
-  --inverse-surface: #303030;
-  --inverse-on-surface: #f3f0ef;
-
   --outline: #737873;
   --outline-variant: #c3c8c1;
 
   --primary: #516255;
   --on-primary: #ffffff;
   --primary-container: #87998a;
-  --on-primary-container: #213125;
-  --inverse-primary: #b9cbbb;
   --primary-fixed: #d4e7d6;
-  --primary-fixed-dim: #b9cbbb;
   --on-primary-fixed: #0f1f14;
-  --on-primary-fixed-variant: #3a4b3e;
 
   --secondary: #625e58;
-  --on-secondary: #ffffff;
-  --secondary-container: #e5dfd7;
   --on-secondary-container: #66625c;
-  --secondary-fixed: #e8e1da;
-  --secondary-fixed-dim: #cbc6be;
-  --on-secondary-fixed: #1e1b17;
-  --on-secondary-fixed-variant: #4a4641;
+  --secondary-container: #e5dfd7;
 
-  --tertiary: #735853;
-  --on-tertiary: #ffffff;
-  --tertiary-container: #ad8d87;
-  --on-tertiary-container: #3e2724;
-  --tertiary-fixed: #ffdad4;
-  --tertiary-fixed-dim: #e2beb8;
-  --on-tertiary-fixed: #2a1613;
-  --on-tertiary-fixed-variant: #5a413c;
-
-  --error: #ba1a1a;
-  --on-error: #ffffff;
-  --error-container: #ffdad6;
-  --on-error-container: #93000a;
-
-  --background: #fcf9f8;
-  --on-background: #1b1c1c;
-
-  /* RGB triplets for translucent variants (rgb(var(--x-rgb) / <alpha>)) */
+  /* RGB triplets for translucent variants: rgb(var(--x-rgb) / <alpha>) */
   --surface-rgb: 252 249 248;
   --surface-container-low-rgb: 246 243 242;
   --primary-rgb: 81 98 85;
@@ -71,25 +34,32 @@
   --outline-variant-rgb: 195 200 193;
   --on-background-rgb: 27 28 28;
 
-  /* --- Typography -------------------------------------------------------- */
+  /* --- Fonts ------------------------------------------------------------- */
   --font-headline: "Playfair Display", ui-serif, Georgia, serif;
   --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Type scale (font shorthand: weight size/line-height family) -------- */
+  --type-headline-lg: 400 36px/44px var(--font-headline);
+  --type-headline-md: 500 26px/34px var(--font-headline);
+  --type-headline-sm: 500 20px/28px var(--font-headline);
+  --type-body-lg: 400 18px/28px var(--font-body);
+  --type-body-md: 400 15px/24px var(--font-body);
+  --type-body-sm: 400 13px/20px var(--font-body);
+  --type-label-lg: 600 14px/20px var(--font-body);
+  --type-label-md: 500 12px/16px var(--font-body);
+  --type-label-sm: 600 11px/14px var(--font-body);
 
   /* --- Spacing ----------------------------------------------------------- */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
-  --space-lg: 1.75rem;
   --space-xl: 3rem;
-  --space-2xl: 4.5rem;
-
   --gutter: 1.5rem;
   --gutter-mobile: 1rem;
   --margin: 3rem;
   --margin-mobile: 1.25rem;
 
   /* --- Radii ------------------------------------------------------------- */
-  --radius-sm: 0.25rem;
   --radius: 0.5rem;
   --radius-md: 0.75rem;
   --radius-lg: 1rem;

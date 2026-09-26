@@ -33,7 +33,7 @@
               "</div>" +
               '<div class="product-card__cta">' +
                 '<a class="btn btn--primary btn--sm btn--block" href="' + wa(p.message) + '" rel="noopener noreferrer" target="_blank">' +
-                  '<span class="material-symbols-outlined icon icon--16">chat</span>' +
+                  '<span class="material-symbols-outlined icon icon--sm">chat</span>' +
                   "<span>Tenho interesse</span>" +
                 "</a>" +
               "</div>" +
