@@ -75,6 +75,16 @@
   /* Layout */
   --container-max: 80rem;
   --header-height: 5rem;
+
+  /* Motion: central timing / easing / intensity knobs.
+     Tweak these to re-time every hover, panel and reveal animation. */
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 240ms;   /* colour + icon micro-changes */
+  --duration-hover: 420ms;  /* hover lifts and underlines */
+  --duration-panel: 360ms;  /* mobile menu open/close */
+  --duration-reveal: 750ms; /* scroll-in reveal */
+  --lift-sm: -2px;          /* subtle hover lift (buttons) */
+  --lift-md: -5px;          /* card hover lift */
 }
 
 /* ==========================================================================
@@ -91,6 +101,8 @@
 
 html {
   height: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 1.25rem);
   -webkit-text-size-adjust: 100%;
   font-family: var(--font-body);
   line-height: 1.5;
@@ -234,6 +246,10 @@ summary {
   padding-block: clamp(3rem, 6vw, 4rem);
 }
 
+.section[id] {
+  scroll-margin-top: calc(var(--header-height) + 1.25rem);
+}
+
 .section--hero {
   padding-top: clamp(2rem, 5vw, 4rem);
   padding-bottom: clamp(3rem, 8vw, 5rem);
@@ -327,18 +343,21 @@ summary {
   box-shadow: var(--shadow-header);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-0.5rem);
+  transform: translateY(-0.75rem) scale(0.98);
+  transform-origin: top center;
   pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  transition: opacity var(--duration-panel) var(--ease-soft),
+    transform var(--duration-panel) var(--ease-soft), visibility var(--duration-panel);
 
   &.is-open {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     pointer-events: auto;
   }
 
   .site-nav__link {
+    position: relative;
     padding: 0.875rem var(--space-xs);
     border-bottom: var(--border-soft);
     color: var(--secondary);
@@ -346,7 +365,11 @@ summary {
     line-height: 20px;
     font-weight: 500;
     letter-spacing: 0.04em;
-    transition: color 0.15s ease;
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    transition: color var(--duration-fast) var(--ease-soft),
+      opacity var(--duration-panel) var(--ease-soft),
+      transform var(--duration-panel) var(--ease-soft);
 
     &:last-child {
       border-bottom: 0;
@@ -360,6 +383,19 @@ summary {
       color: var(--primary);
       font-weight: 600;
     }
+  }
+
+  @media (max-width: 767.98px) {
+    &.is-open .site-nav__link {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &.is-open .site-nav__link:nth-child(1) { transition-delay: 0.06s; }
+    &.is-open .site-nav__link:nth-child(2) { transition-delay: 0.12s; }
+    &.is-open .site-nav__link:nth-child(3) { transition-delay: 0.18s; }
+    &.is-open .site-nav__link:nth-child(4) { transition-delay: 0.24s; }
+    &.is-open .site-nav__link:nth-child(5) { transition-delay: 0.3s; }
   }
 
   @media (min-width: 768px) {
@@ -382,6 +418,28 @@ summary {
       padding: 0;
       border-bottom: 0;
       font-size: 14px;
+      opacity: 1;
+      transform: none;
+      transition: color var(--duration-fast) var(--ease-soft);
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -0.4rem;
+        height: 2px;
+        border-radius: var(--radius-full);
+        background-color: currentColor;
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform var(--duration-hover) var(--ease-soft);
+      }
+
+      &:hover::after,
+      &.is-active::after {
+        transform: scaleX(1);
+      }
     }
   }
 }
@@ -402,7 +460,7 @@ summary {
   flex-shrink: 0;
   border-radius: var(--radius-md);
   color: var(--on-surface);
-  transition: background-color 0.15s ease;
+  transition: background-color var(--duration-fast) var(--ease-soft);
 
   &:hover {
     background-color: var(--surface-container-low);
@@ -515,7 +573,7 @@ summary {
       color: var(--secondary);
       font-size: 13px;
       line-height: 20px;
-      transition: color 0.15s ease;
+      transition: color var(--duration-fast) var(--ease-soft);
 
       &:hover {
         color: var(--primary);
@@ -646,11 +704,18 @@ summary {
   letter-spacing: 0.04em;
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease,
-    box-shadow 0.15s ease;
+  transition: background-color var(--duration-hover) var(--ease-soft),
+    color var(--duration-hover) var(--ease-soft),
+    transform var(--duration-hover) var(--ease-soft),
+    box-shadow var(--duration-hover) var(--ease-soft);
+
+  &:hover {
+    transform: translateY(var(--lift-sm));
+    box-shadow: var(--shadow-md);
+  }
 
   &:active {
-    transform: scale(0.95);
+    transform: translateY(0) scale(0.97);
   }
 }
 
@@ -722,7 +787,8 @@ summary {
   font: var(--type-label-md);
   letter-spacing: 0.06em;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: background-color var(--duration-hover) var(--ease-soft),
+    color var(--duration-hover) var(--ease-soft);
 
   &:hover {
     background-color: var(--surface-container-high);
@@ -848,10 +914,14 @@ summary {
   flex-direction: column;
   justify-content: space-between;
   padding: clamp(1rem, 2vw, 1.25rem);
-  transition: box-shadow 0.15s ease;
+  transition: box-shadow var(--duration-hover) var(--ease-soft),
+    transform var(--duration-hover) var(--ease-soft),
+    border-color var(--duration-hover) var(--ease-soft);
 
   &:hover {
     box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--primary-container) 45%, transparent);
+    transform: translateY(var(--lift-md));
   }
 
   .product-card__head {
@@ -934,14 +1004,20 @@ summary {
   flex-direction: column;
   justify-content: space-between;
   padding: 1.25rem;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition: background-color var(--duration-hover) var(--ease-soft),
+    border-color var(--duration-hover) var(--ease-soft),
+    transform var(--duration-hover) var(--ease-soft),
+    box-shadow var(--duration-hover) var(--ease-soft);
 
   &:hover {
     background-color: var(--surface-container-low);
     border-color: var(--primary-container);
+    box-shadow: var(--shadow-md);
+    transform: translateY(var(--lift-md));
 
     .category-card__icon {
       background-color: color-mix(in srgb, var(--primary-container) 20%, transparent);
+      transform: scale(1.08);
     }
   }
 
@@ -955,7 +1031,8 @@ summary {
     border-radius: var(--radius-full);
     background-color: var(--surface-container-low);
     color: var(--primary);
-    transition: background-color 0.15s ease;
+    transition: background-color var(--duration-hover) var(--ease-soft),
+      transform var(--duration-hover) var(--ease-soft);
   }
 
   .category-card__title {
@@ -1343,10 +1420,14 @@ summary {
   padding: clamp(1.5rem, 3vw, 2rem);
   border: var(--border);
   border-radius: var(--radius-xl);
-  transition: box-shadow 0.15s ease;
+  transition: box-shadow var(--duration-hover) var(--ease-soft),
+    transform var(--duration-hover) var(--ease-soft),
+    border-color var(--duration-hover) var(--ease-soft);
 
   &:hover {
     box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--primary) 35%, transparent);
+    transform: translateY(var(--lift-md));
   }
 
   &.path-card--featured {
@@ -1503,7 +1584,7 @@ summary {
 
   .faq-item__icon {
     color: var(--secondary);
-    transition: transform 0.2s ease;
+    transition: transform var(--duration-hover) var(--ease-soft);
   }
 
   .faq-item__answer {
@@ -1536,5 +1617,36 @@ summary {
   strong {
     color: var(--on-surface);
     font-weight: 500;
+  }
+}
+
+/* ==========================================================================
+   23. Reveal on scroll
+   js/main.js adds `.reveal` to sections/cards and `.is-visible` once they
+   enter the viewport. Animates the standalone `translate` property (not
+   `transform`) so it never clashes with hover lifts.
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+}
+
+.reveal.is-visible {
+  animation: reveal-in var(--duration-reveal) var(--ease-soft) both;
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
   }
 }
