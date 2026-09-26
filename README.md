@@ -2,80 +2,48 @@
 
 Static landing page for Elena, Independent Atomy Distributor in Portugal.
 No build step, no framework, no dependencies — plain HTML, CSS and JavaScript
-that you can open directly or host on any static host (GitHub Pages, Netlify,
-etc.).
-
----
+you can open directly or host on any static host (GitHub Pages, Netlify, …).
 
 ## Run it
 
-### Option 1 — just open the file
+Just open `index.html`. Classic scripts are used (no ES modules, no `fetch`),
+so double-clicking the file works. Internet access is only needed for Google
+Fonts and the externally hosted product images.
 
-Classic scripts are used (no ES modules, no `fetch`), so you can double-click
-`index.html` and it works. You only need internet access for the Google Fonts
-and the externally hosted product images.
-
-### Option 2 — local static server (recommended while developing)
-
-Any static server works. From the project root:
+For a local server while developing:
 
 ```bash
-# Python 3 (usually already installed)
-python -m http.server 8765
-# then open http://localhost:8765
-
-# or Node
-npx serve .
-npx http-server -p 8765
+python -m http.server 8765   # then open http://localhost:8765
 ```
 
-Then open `http://localhost:8765/`.
-
-In VS Code you can also use the **Live Server** extension (right-click
-`index.html` → "Open with Live Server").
-
 There is no install step, no `npm install`, no compilation.
-
----
 
 ## Project structure
 
 ```
-index.html          The whole page. Sections are literal HTML.
-css/
-  tokens.css        Design tokens: colors, fonts, type scale, spacing, shadows.
-  base.css          Reset + base element styles + small helpers.
-  styles.css        Layout, components and sections (the bulk of the CSS).
-js/
-  data.js           Content + contact info. Edit this for text/number changes.
-  render.js         Turns DATA into markup: lists and contact links.
-  interactions.js   Product filter + skin-assessment modal behaviour.
-DESIGN.md           Original design-system reference (colors, type, spacing).
-landing.html        Original exported version, kept as a reference. Safe to delete.
+index.html        The whole page. Sections are literal HTML.
+css/styles.css    All styles: design tokens, reset, layout, components, sections.
+js/data.js        Content + contact info. Edit this for text/number changes.
+js/render.js      Builds the lists, contact links, product filter and modal.
 ```
-
----
 
 ## Editing content
 
 Almost everything you will want to change lives in **`js/data.js`**.
 
-### Contact / social links (single source of truth)
+### Contact
 
 ```js
 window.DATA = {
   contact: {
-    phone: "+351 918 823 650",  // drives BOTH WhatsApp links and tel: links
-    instagram: "",              // optional; fill to enable
-    email: "",                  // optional; fill to enable
+    phone: "+351 918 823 650",  // drives both WhatsApp and tel: links
   },
   ...
 };
 ```
 
-`phone` is the only place the number is written. WhatsApp links use the digits
-(`351918823650`); `tel:` links and the displayed number use the same value.
-Change it once and every button, product card, category and the modal update.
+`phone` is the only place the number is written. Change it once and every
+button, product card, category and the footer update.
 
 ### Products and FAQs
 
@@ -84,7 +52,7 @@ Both are arrays of plain objects:
 ```js
 products: [
   {
-    category: "oral",              // matches a filter chip: all | skincare | oral | wellness | hair
+    category: "oral",              // all | skincare | oral | wellness | hair
     tag: "Higiene oral",
     title: "Atomy Pasta Dentífrica com Própolis",
     desc: "Com extrato de própolis verde …",
@@ -102,15 +70,14 @@ faqs: [
 `message` is the prefilled WhatsApp text. `category` must match one of the
 filter buttons in `index.html`.
 
----
-
 ## How the JS works
 
-`render.js` runs on page load and:
+`js/render.js` runs on page load and:
 
 1. Fills every element with a `data-list="<key>"` attribute from
    `DATA[<key>]` (currently `products` and `faqs`).
 2. Resolves contact links from `DATA.contact`.
+3. Wires the product filter and the skin-assessment modal.
 
 ### Link/data attributes
 
@@ -121,13 +88,11 @@ filter buttons in `index.html`.
 | `data-wa="msg"` | `https://wa.me/<digits>?text=<encoded msg>` |
 | `data-tel` | `tel:<digits>` |
 | `data-phone` | element text set to `DATA.contact.phone` |
-| `data-instagram` | `href` set from `DATA.contact.instagram` (hidden if empty) |
-| `data-email` | `mailto:` from `DATA.contact.email` (hidden if empty) |
 
 Example — a plain WhatsApp button in `index.html`:
 
 ```html
-<a class="btn btn--primary btn--header" data-wa rel="noopener" target="_blank">Falar no WhatsApp</a>
+<a class="btn btn--primary btn--sm" data-wa rel="noopener" target="_blank">Falar no WhatsApp</a>
 ```
 
 ### Add a new data-driven list
@@ -154,7 +119,7 @@ Example — a plain WhatsApp button in `index.html`:
 ### Product filter
 
 The filter chips (`<button class="chip" data-filter="…">`) toggle product cards
-by their `data-category`. The logic is in `js/interactions.js`.
+by their `data-category`. The logic is in `js/render.js`.
 
 ### Skin assessment modal
 
@@ -169,39 +134,19 @@ The modal markup is at the bottom of the `#caminhos` section
 On submit it composes a WhatsApp message from the answers and opens it. Close
 targets use `data-close-skin-quiz`; `Esc` and clicking the backdrop also close.
 
----
-
 ## Styling
 
-- `tokens.css` holds all design values. Colors are CSS variables; the type
-  scale is exposed as `font` shorthand variables, e.g.
-  `font: var(--type-body-md);` and `font: var(--type-headline-lg);`.
-- `styles.css` is organised in numbered sections (layout, buttons, cards,
-  forms, modal, footer, …). Buttons come as base + tone
-  (`--primary/--secondary/--soft/--quiet`) + size (`--sm/--md/--lg`).
+- All design values (colors, fonts, type scale, spacing, radii, shadows) are
+  CSS variables at the top of `css/styles.css`. To restyle the brand, change
+  the color variables there; most of the page follows automatically.
+- Buttons come as base + tone (`--primary/--secondary/--soft/--quiet`) + size
+  (`--sm`/`--lg`) + width (`--block`/`--block-sm`).
 - Icons use Material Symbols with size helpers `.icon--sm/md/lg/xl/2xl`.
-
-To restyle the brand, change the color variables in `tokens.css`; most of the
-page follows automatically.
-
----
 
 ## Deploy (GitHub Pages)
 
 1. Commit and push the repository.
-2. In the repo: **Settings → Pages**.
-3. Source: branch `main`, folder `/ (root)`.
-4. Save. The page is served at `https://<user>.github.io/<repo>/`.
+2. Repo **Settings → Pages**, source `main` / `/ (root)`, save.
+3. Served at `https://<user>.github.io/<repo>/`.
 
 All paths are relative, so it works from a subpath without changes.
-
----
-
-## Notes / known items
-
-- The product `image` URLs point at externally hosted Google images. Some may
-  expire or be blocked; replace them with your own hosted images when possible.
-- `landing.html` is the original export and is not used by `index.html`. Delete
-  it once you no longer need it as a reference.
-- The skin-assessment modal has no trigger by default (same as the original
-  export); add `data-open-skin-quiz` where you want it.

@@ -7,8 +7,6 @@
 window.DATA = {
   contact: {
     phone: "+351 918 823 650",
-    instagram: "",
-    email: "",
   },
 
   products: [
