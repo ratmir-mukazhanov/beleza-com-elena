@@ -34,7 +34,7 @@
                   '<span class="product-card__tag">' + p.tag + "</span>" +
                 "</div>" +
                 '<div class="product-card__media">' +
-                  '<img class="product-card__img" alt="' + p.alt + '" src="' + p.image + '">' +
+                  '<img class="product-card__img" alt="' + p.alt + '" src="' + p.image + '" loading="lazy" decoding="async">' +
                 "</div>" +
                 '<h3 class="product-card__title">' + p.title + "</h3>" +
                 '<p class="product-card__desc">' + p.desc + "</p>" +
