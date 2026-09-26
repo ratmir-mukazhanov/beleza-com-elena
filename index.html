@@ -20,28 +20,527 @@
   <link rel="stylesheet" href="css/sections.css">
 </head>
 <body>
-  <div data-include="partials/header.html"></div>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header pt-safe">
+    <div class="site-header__inner">
+      <div class="brand">
+        <button class="icon-button icon-button--mobile" type="button" aria-label="Menu">
+          <span class="material-symbols-outlined icon icon--24">menu</span>
+        </button>
+        <div class="brand__text">
+          <span class="brand__name">Elena</span>
+          <span class="brand__sub">Distribuidora Independente Atomy</span>
+        </div>
+      </div>
+
+      <nav class="site-nav" aria-label="Navegação principal">
+        <a class="site-nav__link" href="#produtos">Produtos</a>
+        <a class="site-nav__link" href="#categorias">Categorias</a>
+        <a class="site-nav__link" href="#sobre">Sobre mim</a>
+        <a class="site-nav__link" href="#como-funciona">Como funciona</a>
+        <a class="site-nav__link" href="#faq">Perguntas</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn--primary btn--header" href="https://wa.me/351900000000" rel="noopener noreferrer" target="_blank" aria-label="WhatsApp Consulta">
+          <span class="material-symbols-outlined icon icon--18">chat</span>
+          <span class="hide-sm">Falar no WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </header>
 
   <main class="page">
     <div class="page__body">
-      <div data-include="partials/hero.html"></div>
-      <div data-include="partials/products.html"></div>
-      <div data-include="partials/categories.html"></div>
-      <div data-include="partials/philosophy.html"></div>
-      <div data-include="partials/about.html"></div>
-      <div data-include="partials/how-it-works.html"></div>
-      <div data-include="partials/cta.html"></div>
-      <div data-include="partials/paths.html"></div>
-      <div data-include="partials/skin-quiz-modal.html"></div>
-      <div data-include="partials/faq.html"></div>
-      <div data-include="partials/disclaimer.html"></div>
+
+      <!-- ===================== HERO ===================== -->
+      <section class="section section--hero">
+        <div class="hero">
+          <div class="hero__content">
+            <div class="badge badge--hero">
+              <span class="badge__dot badge__dot--pulse"></span>
+              <span class="badge__text">Distribuidor Independente Atomy · Portugal</span>
+            </div>
+
+            <h1 class="hero__title">Produtos coreanos para beleza, cuidado e bem-estar</h1>
+
+            <p class="hero__lead">Descubra uma seleção cuidadosa dos melhores produtos Atomy em Portugal. Acompanhamento direto, personalizado e sem compromisso para transformar o seu autocuidado diário.</p>
+
+            <div class="hero__actions">
+              <a class="btn btn--primary btn--block-sm" href="#produtos">
+                <span>Ver produtos</span>
+                <span class="material-symbols-outlined icon icon--18">arrow_downward</span>
+              </a>
+              <a class="btn btn--secondary btn--block-sm" href="https://wa.me/351900000000?text=Ol%C3%A1%20Elena%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20Atomy." rel="noopener noreferrer" target="_blank">
+                <span class="material-symbols-outlined icon icon--18 icon--primary">chat</span>
+                <span>Falar com a Elena</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero__media">
+            <div class="hero__frame">
+              <div class="hero__image-wrap">
+                <img class="hero__img" alt="Seleção Botânica &amp; Cuidados Diários Atomy" src="https://lh3.googleusercontent.com/aida/AEtjO1UOsK4UEI7DZg3nuuXFOQWynQuoqus0P8kN7JVARcPOVew3x0po9_KuGEL8Fbh4ZW5iAnUbSHUoF0VyEvXWHGlXJTrvCJvgT2opmbUDCVxyFtRZBrcnXACSiyK1aSevnhcqLhptdWVgbwbgHCZlBeigWQP2QkNX653IedZvQyf9c4fx2ahOWbXYKkJDER1kCHcoaETI_1sQnQotURthrJA6Gsg5EG8eS9fzmX9aeUQiI2HifqhtMstzMmxb">
+                <div class="hero__caption">
+                  <div class="badge badge--glass badge--outline badge--px-lg">
+                    <span class="badge__text badge__text--plain">
+                      <span class="material-symbols-outlined icon icon--15 icon--primary">eco</span>Seleção Botânica &amp; Cuidados Diários Atomy
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== PRODUTOS EM DESTAQUE ===================== -->
+      <section class="section" id="produtos">
+        <div class="products__toolbar">
+          <div>
+            <span class="eyebrow">Rotina Equilibrada</span>
+            <h2 class="section-title">Produtos em destaque</h2>
+            <p class="section-subtitle">Alguns dos produtos Atomy mais procurados e recomendados para a sua rotina diária.</p>
+          </div>
+          <div class="filters" role="group" aria-label="Filtrar produtos por categoria">
+            <button class="chip is-active" data-filter="all" type="button">Todos</button>
+            <button class="chip" data-filter="skincare" type="button">Cuidados da pele</button>
+            <button class="chip" data-filter="oral" type="button">Higiene oral</button>
+            <button class="chip" data-filter="wellness" type="button">Bem-estar</button>
+            <button class="chip" data-filter="hair" type="button">Cabelo</button>
+          </div>
+        </div>
+
+        <!-- cartões gerados a partir de js/data.js (products) -->
+        <div class="products__grid" id="products-grid" data-list="products"></div>
+      </section>
+
+      <!-- ===================== EXPLORE POR CATEGORIA ===================== -->
+      <section class="section" id="categorias">
+        <div class="section-header">
+          <span class="eyebrow">Catálogo Cuidado</span>
+          <h2 class="section-title">Explore por categoria</h2>
+          <p class="section-subtitle">Soluções completas para a sua rotina diária de saúde e bem-estar</p>
+        </div>
+
+        <div class="categories__grid">
+          <a class="category-card" href="https://wa.me/351900000000?text=Gostaria%20de%20conhecer%20os%20produtos%20para%20Cuidados%20da%20Pele." rel="noopener noreferrer" target="_blank">
+            <div class="category-card__icon"><span class="material-symbols-outlined icon icon--24">auto_awesome</span></div>
+            <div>
+              <h3 class="category-card__title">Cuidados da pele</h3>
+              <p class="category-card__desc">Tónicos, essências e protetores solares.</p>
+            </div>
+          </a>
+          <a class="category-card" href="https://wa.me/351900000000?text=Gostaria%20de%20conhecer%20os%20produtos%20de%20Higiene%20Oral." rel="noopener noreferrer" target="_blank">
+            <div class="category-card__icon"><span class="material-symbols-outlined icon icon--24">clean_hands</span></div>
+            <div>
+              <h3 class="category-card__title">Higiene oral</h3>
+              <p class="category-card__desc">Pastas com própolis e escovas suaves.</p>
+            </div>
+          </a>
+          <a class="category-card" href="https://wa.me/351900000000?text=Gostaria%20de%20conhecer%20os%20produtos%20para%20Cabelo." rel="noopener noreferrer" target="_blank">
+            <div class="category-card__icon"><span class="material-symbols-outlined icon icon--24">shower</span></div>
+            <div>
+              <h3 class="category-card__title">Cabelo</h3>
+              <p class="category-card__desc">Shampoos botânicos e cuidados nutritivos.</p>
+            </div>
+          </a>
+          <a class="category-card" href="https://wa.me/351900000000?text=Gostaria%20de%20conhecer%20os%20produtos%20de%20Cuidados%20Pessoais." rel="noopener noreferrer" target="_blank">
+            <div class="category-card__icon"><span class="material-symbols-outlined icon icon--24">soap</span></div>
+            <div>
+              <h3 class="category-card__title">Cuidados pessoais</h3>
+              <p class="category-card__desc">Sabonetes e loções corporais suaves.</p>
+            </div>
+          </a>
+          <a class="category-card" href="https://wa.me/351900000000?text=Gostaria%20de%20conhecer%20os%20produtos%20de%20Sa%C3%BAde%20e%20Bem-estar." rel="noopener noreferrer" target="_blank">
+            <div class="category-card__icon"><span class="material-symbols-outlined icon icon--24">energy_savings_leaf</span></div>
+            <div>
+              <h3 class="category-card__title">Saúde &amp; bem-estar</h3>
+              <p class="category-card__desc">Infusões, extratos e suplementos puros.</p>
+            </div>
+          </a>
+          <a class="category-card" href="https://wa.me/351900000000?text=Gostaria%20de%20conhecer%20os%20produtos%20para%20Homem." rel="noopener noreferrer" target="_blank">
+            <div class="category-card__icon"><span class="material-symbols-outlined icon icon--24">face</span></div>
+            <div>
+              <h3 class="category-card__title">Homem</h3>
+              <p class="category-card__desc">Cuidados práticos para barbear e pele.</p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ===================== FILOSOFIA DE PRODUTO ===================== -->
+      <section class="section">
+        <div class="section-header">
+          <span class="eyebrow">Filosofia de Qualidade</span>
+          <h2 class="section-title">Mais do que uma rotina de cuidados</h2>
+          <p class="section-subtitle">Princípios orientadores da filosofia coreana de harmonia e bem-estar</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="philosophy-card">
+            <div class="philosophy-card__top">
+              <span class="philosophy-card__num">01</span>
+              <span class="material-symbols-outlined icon icon--24 philosophy-card__icon">biotech</span>
+            </div>
+            <div>
+              <h3 class="philosophy-card__title">Inovação Coreana</h3>
+              <p class="philosophy-card__desc">Investigação científica avançada combinada harmoniosamente com extratos botânicos ancestrais asiáticos.</p>
+            </div>
+          </div>
+          <div class="philosophy-card">
+            <div class="philosophy-card__top">
+              <span class="philosophy-card__num">02</span>
+              <span class="material-symbols-outlined icon icon--24 philosophy-card__icon">verified</span>
+            </div>
+            <div>
+              <h3 class="philosophy-card__title">Qualidade e Consistência</h3>
+              <p class="philosophy-card__desc">Produção certificada internacionalmente com padrões rigorosos de pureza e formulações dermatologicamente testadas.</p>
+            </div>
+          </div>
+          <div class="philosophy-card">
+            <div class="philosophy-card__top">
+              <span class="philosophy-card__num">03</span>
+              <span class="material-symbols-outlined icon icon--24 philosophy-card__icon">spa</span>
+            </div>
+            <div>
+              <h3 class="philosophy-card__title">Para o Dia a Dia</h3>
+              <p class="philosophy-card__desc">Formulado para integrar a sua rotina diária de forma simples, leve e com momentos autênticos de calma e prazer.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SOBRE A ELENA ===================== -->
+      <section class="section" id="sobre">
+        <div class="about-card">
+          <div class="about__grid">
+            <div class="about__media-col">
+              <div class="about__media">
+                <img class="about__img" alt="Elena - Distribuidora Independente Atomy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCReanLZ5d03U77mTsSGiEJ0n8dICBs_jP--wCb_wBkmppt8PSDAQGSSW0dNaebP9oN9kO_tVuwdDNcPR9t8DNvwVMqr10ckX2sVC9RPhMzQZ60ACbn93VUGxYu7ndcMVGK5-U03P3U0YHwAsXMVAO8lj2Bsa-queNEAC145ntY1m47aW0h5EbacsbfsP-KkvVoVhxN98MIiM5BqwsQZOZeeGWExDSDLCnkkGbfVsE27JjNBSlZ-pL_UA">
+                <div class="about__caption">
+                  <div class="badge badge--glass">
+                    <span class="badge__dot"></span>
+                    <span class="badge__text">Distribuidora Oficial Portugal</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="about__content">
+              <span class="eyebrow">Consultora Pessoal</span>
+              <h2 class="about__name">Olá, sou a Elena</h2>
+              <span class="about__role">A sua consultora de confiança em Portugal</span>
+              <p class="about__bio">Sou distribuidora independente Atomy em Portugal. A minha missão é ajudá-lo(a) a conhecer os produtos coreanos mais adequados ao seu tipo de pele e rotina diária. Acompanho cada pessoa de forma personalizada, com empatia, escuta ativa e sem qualquer tipo de pressão ou compromisso.</p>
+
+              <div class="about__quote">
+                <p>«Acredito que o cuidado diário deve ser um momento de serenidade e bem-estar autêntico.»</p>
+              </div>
+
+              <div class="about__actions">
+                <a class="btn btn--primary btn--block-sm" href="https://wa.me/351900000000?text=Ol%C3%A1%20Elena%2C%20gostaria%20de%20conversar%20consigo%20sobre%20os%20produtos%20Atomy." rel="noopener noreferrer" target="_blank">
+                  <span class="material-symbols-outlined icon icon--20">support_agent</span>
+                  <span>Falar com a Elena</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== COMO FUNCIONA ===================== -->
+      <section class="section" id="como-funciona">
+        <div class="section-header section-header--center">
+          <span class="eyebrow">Apoio Personalizado</span>
+          <h2 class="section-title">É simples começar</h2>
+          <p class="section-subtitle">Sem complicações, com acompanhamento direto e individual em cada passo</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="step">
+            <div class="step__num">1</div>
+            <h3 class="step__title">Passo 01: Escolha</h3>
+            <p class="step__desc">Explore os produtos e encontre aquilo que procura para a sua rotina de cuidados diários ou solicite recomendações.</p>
+          </div>
+          <div class="step">
+            <div class="step__num">2</div>
+            <h3 class="step__title">Passo 02: Pergunte</h3>
+            <p class="step__desc">Envie-me uma mensagem no WhatsApp se tiver dúvidas sobre textura, modo de aplicação, tipo de pele ou ingredientes.</p>
+          </div>
+          <div class="step">
+            <div class="step__num">3</div>
+            <h3 class="step__title">Passo 03: Encomende</h3>
+            <p class="step__desc">Explico-lhe como encomendar os produtos de forma segura e direta com envio oficial para qualquer morada em Portugal.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== CTA WHATSAPP ===================== -->
+      <section class="section section--cta">
+        <div class="cta-card">
+          <div class="cta-card__icon"><span class="material-symbols-outlined icon icon--28">chat</span></div>
+          <h2 class="cta-card__title">Tem dúvidas sobre algum produto?</h2>
+          <p class="cta-card__text">Fale diretamente comigo. Terei todo o gosto em ajudar a escolher o produto certo para as necessidades da sua pele e saúde.</p>
+          <a class="btn btn--primary btn--lg btn--block-sm cta-card__action" href="https://wa.me/351900000000?text=Ol%C3%A1%20Elena%2C%20tenho%20algumas%20d%C3%BAvidas%20sobre%20os%20produtos%20Atomy." rel="noopener noreferrer" target="_blank">
+            <span class="material-symbols-outlined icon icon--22">forum</span>
+            <span>Falar comigo no WhatsApp</span>
+          </a>
+          <div class="badge badge--status">
+            <span class="badge__dot"></span>
+            <span class="badge__text badge__text--plain">Tempo médio de resposta: menos de 2 horas</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== O SEU CAMINHO ===================== -->
+      <section class="section" id="caminhos">
+        <div class="section-header section-header--center-lg section-header--lg">
+          <div class="badge badge--heading badge--primary-text">
+            <span class="badge__dot"></span>
+            <span class="badge__text">O Seu Caminho Connosco</span>
+          </div>
+          <h2 class="section-title">Como deseja conectar-se connosco?</h2>
+          <p class="section-subtitle">Seja para transformar a sua rotina de pele, construir o seu negócio independente ou experimentar os produtos em primeira mão, há um caminho feito à sua medida com acompanhamento dedicado da Elena.</p>
+        </div>
+
+        <div class="grid-3--wide">
+          <!-- Caminho 01 -->
+          <div class="path-card">
+            <div class="path-card__body">
+              <div class="path-card__icon"><span class="material-symbols-outlined icon icon--28">spa</span></div>
+              <div class="path-card__label"><span>Caminho 01</span></div>
+              <h3 class="path-card__title">Quero ser cliente</h3>
+              <p class="path-card__desc">Descubra produtos coreanos premium para a sua rotina com aconselhamento personalizado, fórmulas puras e benefícios diretos.</p>
+              <div class="path-card__note">
+                <p>
+                  <span class="material-symbols-outlined icon icon--18 icon--primary">description</span>
+                  <span>Faça a sua avaliação personalizada no nosso formulário e receba a sua rotina coreana recomendada pela Elena.</span>
+                </p>
+              </div>
+            </div>
+            <div class="path-card__actions">
+              <a class="btn btn--primary btn--md btn--block" href="https://docs.google.com/forms/d/e/1FAIpQLSf6engnh0fewnN0V7FlBbO9dxhaHpAmWq1UK7JElDX5TDmpHg/viewform?usp=dialog" rel="noopener noreferrer" target="_blank">
+                <span class="material-symbols-outlined icon icon--18">assignment</span>
+                <span>Preencher Avaliação de Pele</span>
+                <span class="material-symbols-outlined icon icon--16">open_in_new</span>
+              </a>
+              <a class="btn btn--soft btn--md-sm btn--block" href="https://wa.me/351900000000?text=Ol%C3%A1%20Elena%2C%20gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20a%20avalia%C3%A7%C3%A3o%20de%20pele%20e%20produtos%20Atomy." rel="noopener noreferrer" target="_blank">
+                <span class="material-symbols-outlined icon icon--18 icon--primary">chat</span>
+                <span>Tirar dúvidas no WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Caminho 02 -->
+          <div class="path-card path-card--featured">
+            <div class="path-card__ribbon"><span>Oportunidade &amp; Mentoria</span></div>
+            <div class="path-card__body">
+              <div class="path-card__icon"><span class="material-symbols-outlined icon icon--28">storefront</span></div>
+              <div class="path-card__label"><span>Caminho 02</span></div>
+              <h3 class="path-card__title">Quero iniciar o meu negócio</h3>
+              <p class="path-card__desc">Torne-se distribuidor(a) independente Atomy. Empreenda com produtos de alta rotação e prestígio, sem investimento inicial obrigatório e com acompanhamento direto da Elena.</p>
+              <ul class="path-card__list">
+                <li><span class="material-symbols-outlined icon icon--17 icon--primary">check_circle</span><span>Sem taxas de adesão ou compras forçadas</span></li>
+                <li><span class="material-symbols-outlined icon icon--17 icon--primary">check_circle</span><span>Mentoria individual e materiais em português</span></li>
+                <li><span class="material-symbols-outlined icon icon--17 icon--primary">check_circle</span><span>Envio oficial direto para clientes em toda a Europa</span></li>
+              </ul>
+            </div>
+            <div class="path-card__actions">
+              <a class="btn btn--primary btn--md btn--md-tall btn--block" href="https://wa.me/351900000000?text=Ol%C3%A1%20Elena%2C%20tenho%20interesse%20em%20saber%20como%20iniciar%20o%20meu%20neg%C3%B3cio%20como%20parceiro(a)%20independente%20Atomy." rel="noopener noreferrer" target="_blank">
+                <span class="material-symbols-outlined icon icon--18">work</span>
+                <span>Saber como ser parceiro(a)</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Caminho 03 -->
+          <div class="path-card">
+            <div class="path-card__body">
+              <div class="path-card__icon"><span class="material-symbols-outlined icon icon--28">celebration</span></div>
+              <div class="path-card__label"><span>Caminho 03</span></div>
+              <h3 class="path-card__title">Demonstração e prova de produtos</h3>
+              <p class="path-card__desc">Experimente as texturas ricas, fragrâncias subtis e a eficácia imediata dos cosméticos e cuidados coreanos Atomy numa sessão presencial ou online sem compromisso.</p>
+              <div class="path-card__note">
+                <p>
+                  <span class="material-symbols-outlined icon icon--18 icon--primary">volunteer_activism</span>
+                  <span>Sessões individuais ou pequenos grupos de amigas em Portugal.</span>
+                </p>
+              </div>
+            </div>
+            <div class="path-card__actions">
+              <a class="btn btn--primary btn--md btn--md-tall btn--block" href="https://wa.me/351900000000?text=Ol%C3%A1%20Elena%2C%20gostaria%20de%20agendar%20uma%20demonstra%C3%A7%C3%A3o%2Fprova%20de%20produtos%20Atomy." rel="noopener noreferrer" target="_blank">
+                <span class="material-symbols-outlined icon icon--18">event_available</span>
+                <span>Agendar demonstração / prova</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== AVALIAÇÃO DE PELE (modal) ===================== -->
+      <div class="modal" id="skin-quiz-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+        <div class="modal__panel">
+          <div class="modal__header">
+            <div class="modal__header-main">
+              <div class="modal__header-icon"><span class="material-symbols-outlined icon icon--20">auto_awesome</span></div>
+              <div>
+                <h3 class="modal__title" id="modal-title">Avaliação de Cuidados da Pele Atomy</h3>
+                <p class="modal__subtitle">Diagnóstico personalizado com a Elena</p>
+              </div>
+            </div>
+            <button class="modal__close" data-close-skin-quiz type="button" aria-label="Fechar">
+              <span class="material-symbols-outlined icon icon--22">close</span>
+            </button>
+          </div>
+
+          <form class="modal__body" id="skin-assessment-form">
+            <div class="form-section">
+              <h4 class="form-section__title">1. Os seus dados de contacto</h4>
+              <div class="form-grid">
+                <div>
+                  <label class="field__label" for="quiz-name">O seu nome completo *</label>
+                  <input class="input" id="quiz-name" type="text" placeholder="Ex.: Maria Santos" required>
+                </div>
+                <div>
+                  <label class="field__label" for="quiz-phone">WhatsApp / Telemóvel *</label>
+                  <input class="input" id="quiz-phone" type="tel" placeholder="Ex.: +351 912 345 678" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section form-section--tight">
+              <h4 class="form-section__title">2. Como sente a sua pele?</h4>
+              <div class="skin-type-grid">
+                <label class="radio-card">
+                  <input class="sr-only" type="radio" name="skinType" value="Normal / Equilibrada" checked>
+                  <span class="material-symbols-outlined icon icon--22">sentiment_satisfied</span>
+                  <span class="radio-card__label">Equilibrada</span>
+                </label>
+                <label class="radio-card">
+                  <input class="sr-only" type="radio" name="skinType" value="Seca / Repuxada">
+                  <span class="material-symbols-outlined icon icon--22">water_drop</span>
+                  <span class="radio-card__label">Seca</span>
+                </label>
+                <label class="radio-card">
+                  <input class="sr-only" type="radio" name="skinType" value="Mista (Zona T oleosa)">
+                  <span class="material-symbols-outlined icon icon--22">balance</span>
+                  <span class="radio-card__label">Mista</span>
+                </label>
+                <label class="radio-card">
+                  <input class="sr-only" type="radio" name="skinType" value="Oleosa / Acneica / Sensível">
+                  <span class="material-symbols-outlined icon icon--22">flare</span>
+                  <span class="radio-card__label">Oleosa / Sensível</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-section form-section--tight">
+              <h4 class="form-section__title">3. Principal objetivo de melhoria</h4>
+              <select class="select" id="quiz-goal">
+                <option value="Hidratação profunda e luminosidade">Hidratação profunda e luminosidade natural</option>
+                <option value="Firmeza, linhas de expressão e anti-idade (Linha CellActive)">Firmeza, linhas de expressão e anti-idade</option>
+                <option value="Uniformização de manchas e tom de pele">Uniformização de manchas e tom de pele</option>
+                <option value="Controlo de oleosidade e poros dilatados">Controlo de oleosidade e poros dilatados</option>
+                <option value="Acalmar vermelhidão e sensibilidade">Acalmar vermelhidão e sensibilidade</option>
+              </select>
+            </div>
+
+            <div class="form-section form-section--tight">
+              <h4 class="form-section__title">4. Que tipo de recomendação Atomy procura?</h4>
+              <select class="select" id="quiz-pref">
+                <option value="Rotina essencial diária (Limpeza + Hidratação + Proteção)">Rotina essencial diária simples (3 passos)</option>
+                <option value="Rotina completa de cuidados coreanos intensivos">Rotina completa coreana intensiva (Ampolas e Essências)</option>
+                <option value="Sugestão de 1 ou 2 produtos para experimentar">Apenas 1 ou 2 produtos-chave para começar</option>
+              </select>
+            </div>
+
+            <div class="modal__footer">
+              <span class="modal__privacy">
+                <span class="material-symbols-outlined icon icon--16 icon--primary">lock</span>
+                <span>Dados enviados com total privacidade à Elena</span>
+              </span>
+              <div class="modal__footer-actions">
+                <button class="btn btn--quiet btn--block-sm" data-close-skin-quiz type="button">Cancelar</button>
+                <button class="btn btn--primary btn--submit btn--block-sm" type="submit">
+                  <span class="material-symbols-outlined icon icon--17">send</span>
+                  <span>Enviar Avaliação à Elena</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ===================== PERGUNTAS FREQUENTES ===================== -->
+      <section class="section section--faq" id="faq">
+        <div class="faq-inner">
+          <div class="section-header section-header--center">
+            <span class="eyebrow">Tire as suas Dúvidas</span>
+            <h2 class="section-title">Perguntas Frequentes</h2>
+          </div>
+
+          <!-- perguntas geradas a partir de js/data.js (faqs) -->
+          <div class="faq-list" data-list="faqs"></div>
+        </div>
+      </section>
+
+      <!-- ===================== NOTA LEGAL ===================== -->
+      <section class="section--disclaimer">
+        <div class="disclaimer">
+          <p><strong>Nota informativa:</strong> Elena é Distribuidora Independente Atomy (Portugal). Este website é gerido de forma independente e tem finalidade exclusivamente informativa e de contacto pessoal, não constituindo o website corporativo oficial da Atomy.</p>
+        </div>
+      </section>
+
     </div>
 
-    <div data-include="partials/footer.html"></div>
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="footer__grid">
+          <div class="footer__brand">
+            <span class="footer__name">Elena</span>
+            <span class="footer__tag">Distribuidora Independente Atomy · Portugal</span>
+            <p class="footer__about">Consultoria dedicada e personalizada sobre a linha de cosméticos botânicos, higiene oral e suplementos coreanos Atomy.</p>
+            <a class="footer__whatsapp" href="https://wa.me/351900000000" rel="noopener noreferrer" target="_blank">
+              <span class="material-symbols-outlined icon icon--18">chat</span>
+              <span>WhatsApp: +351 900 000 000</span>
+            </a>
+          </div>
+
+          <div>
+            <h4 class="footer__col-title">Navegação</h4>
+            <ul class="footer__links">
+              <li><a href="#produtos">Produtos em destaque</a></li>
+              <li><a href="#categorias">Categorias</a></li>
+              <li><a href="#sobre">Sobre a Elena</a></li>
+              <li><a href="#como-funciona">Como encomendar</a></li>
+              <li><a href="#faq">Perguntas Frequentes</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="footer__col-title">Categorias</h4>
+            <ul class="footer__links">
+              <li><a href="#produtos">Cuidados da pele</a></li>
+              <li><a href="#produtos">Higiene oral</a></li>
+              <li><a href="#produtos">Cabelo</a></li>
+              <li><a href="#produtos">Saúde &amp; Bem-estar</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <p class="footer__legal">Este website é gerido de forma independente por Elena, Distribuidora Independente Atomy em Portugal, e não constitui o website oficial corporativo da Atomy Co., Ltd.</p>
+          <p class="footer__copyright">© Elena · Atomy Portugal</p>
+        </div>
+      </div>
+    </footer>
   </main>
 
-  <script src="js/products.js"></script>
-  <script src="js/modal.js"></script>
-  <script src="js/loader.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/interactions.js"></script>
 </body>
 </html>
