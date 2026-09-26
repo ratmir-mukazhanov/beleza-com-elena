@@ -13,7 +13,7 @@ the folder:
 python -m http.server 8765   # http://localhost:8765
 ```
 
-Internet is only needed for Google Fonts and the externally hosted images.
+Internet is only needed for the Google Fonts. Images live in `img/`.
 
 ## Project structure
 
@@ -46,7 +46,7 @@ contact: { phone: "+351 918 823 650" },  // drives the WhatsApp links and number
   title: "Atomy Pasta Dentífrica com Própolis",
   desc: "Com extrato de própolis verde …",
   alt: "Atomy Pasta Dentífrica com Própolis",
-  image: "https://…",
+  image: "img/placeholder.jpg",  // put your own image in img/ and point here
   message: "Olá Elena, tenho interesse na Atomy Pasta Dentífrica com Própolis.",
 }
 ```
