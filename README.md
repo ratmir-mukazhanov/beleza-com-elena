@@ -96,8 +96,10 @@ overrides sit together:
 }
 ```
 
-- Colors, fonts, type scale, spacing, radii and shadows are CSS variables at the
-  top — change the color variables to restyle the brand.
+- Colors, fonts, spacing, radii and shadows are CSS variables at the top —
+  change the color variables to restyle the brand.
+- Spacing and headings are **fluid** (`clamp()`) and grids use `auto-fit`, so the
+  page adapts without many breakpoints. Only ~10 `@media` rules remain.
 - Every card-like component extends the shared `.card` surface; borders use
   `--border-soft` / `--border` / `--border-strong`.
 - Buttons: tone (`--primary/--secondary/--soft`) + size (`--sm`/`--lg`) + width

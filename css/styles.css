@@ -1,8 +1,10 @@
 /* ==========================================================================
    Elena · Atomy landing page — all styles.
    Tokens · base/reset · layout · components · sections.
-   Uses native CSS nesting: child rules are descendants of their block, and
-   `&` refers to the block itself (states, media overrides).
+   Fluid by default: spacing and type use clamp(), grids use auto-fit, so most
+   of the page adapts without breakpoints. The few @media rules left are for
+   genuine layout switches.
+   Uses native CSS nesting (`&` = the block itself, children are descendants).
    ========================================================================== */
 
 /* ==========================================================================
@@ -28,7 +30,7 @@
   --on-secondary-container: #66625c;
   --secondary-container: #e5dfd7;
 
-  /* Borders: soft = card outlines, base = frames, strong = inputs/buttons */
+  /* Borders: soft = card outlines, base = frames, strong = buttons */
   --border-soft: 1px solid color-mix(in srgb, var(--outline-variant) 20%, transparent);
   --border: 1px solid color-mix(in srgb, var(--outline-variant) 30%, transparent);
   --border-strong: 1px solid color-mix(in srgb, var(--outline-variant) 40%, transparent);
@@ -38,7 +40,6 @@
   --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 
   /* Type scale (font shorthand: weight size/line-height family) */
-  --type-headline-lg: 400 36px/44px var(--font-headline);
   --type-headline-md: 500 26px/34px var(--font-headline);
   --type-headline-sm: 500 20px/28px var(--font-headline);
   --type-body-lg: 400 18px/28px var(--font-body);
@@ -52,10 +53,12 @@
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
-  --space-xl: 3rem;
-  --gutter: 1.5rem;
-  --gutter-mobile: 1rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
   --margin-mobile: 1.25rem;
+
+  /* Fluid type for the big headings (mobile → desktop) */
+  --display-lg: clamp(32px, 3vw + 20px, 50px);   /* hero / page titles */
+  --display-md: clamp(26px, 2.2vw + 18px, 36px); /* section / card titles */
 
   /* Radii */
   --radius-md: 0.75rem;
@@ -190,8 +193,8 @@ summary {
 
 /* ==========================================================================
    3. Shared card surface
-   Components (`product-card`, `category-card`, …) add their own padding,
-   radius or layout and inherit border, background and shadow from here.
+   Components add their own padding, radius or layout and inherit border,
+   background and shadow from here.
    ========================================================================== */
 .card {
   padding: 1.5rem;
@@ -227,45 +230,21 @@ summary {
   width: 100%;
   max-width: var(--container-max);
   margin-inline: auto;
-  padding-inline: var(--gutter-mobile);
-  padding-block: var(--space-xl);
-
-  @media (min-width: 640px) {
-    padding-inline: var(--gutter);
-  }
-
-  @media (min-width: 768px) {
-    padding-block: 4rem;
-  }
-
-  @media (min-width: 1024px) {
-    padding-inline: 2rem;
-  }
+  padding-inline: var(--gutter);
+  padding-block: clamp(3rem, 6vw, 4rem);
 }
 
 .section--hero {
-  padding-top: 2rem;
-
-  @media (min-width: 768px) {
-    padding-top: 4rem;
-    padding-bottom: 5rem;
-  }
+  padding-top: clamp(2rem, 5vw, 4rem);
+  padding-bottom: clamp(3rem, 8vw, 5rem);
 }
 
 .section--cta {
-  padding-block: 2.5rem;
-
-  @media (min-width: 768px) {
-    padding-block: 3.5rem;
-  }
+  padding-block: clamp(2.5rem, 5vw, 3.5rem);
 }
 
 .section--faq {
-  padding-block: 2.5rem;
-
-  @media (min-width: 768px) {
-    padding-block: 4rem;
-  }
+  padding-block: clamp(2.5rem, 6vw, 4rem);
 }
 
 .section--disclaimer {
@@ -297,15 +276,7 @@ summary {
     max-width: var(--container-max);
     height: var(--header-height);
     margin-inline: auto;
-    padding-inline: var(--gutter-mobile);
-
-    @media (min-width: 640px) {
-      padding-inline: var(--gutter);
-    }
-
-    @media (min-width: 1024px) {
-      padding-inline: 2rem;
-    }
+    padding-inline: var(--gutter);
   }
 }
 
@@ -391,19 +362,7 @@ summary {
     width: 100%;
     max-width: var(--container-max);
     margin-inline: auto;
-    padding: 3rem var(--gutter-mobile);
-
-    @media (min-width: 640px) {
-      padding-inline: var(--gutter);
-    }
-
-    @media (min-width: 768px) {
-      padding-block: 4rem;
-    }
-
-    @media (min-width: 1024px) {
-      padding-inline: 2rem;
-    }
+    padding: clamp(3rem, 6vw, 4rem) var(--gutter);
   }
 
   .footer__grid {
@@ -411,20 +370,12 @@ summary {
     grid-template-columns: 1fr;
     gap: 2rem;
     margin-bottom: 3rem;
-
-    @media (min-width: 768px) {
-      grid-template-columns: repeat(4, 1fr);
-    }
   }
 
   .footer__brand {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
-    @media (min-width: 768px) {
-      grid-column: span 2;
-    }
   }
 
   .footer__name {
@@ -504,11 +455,6 @@ summary {
     padding-top: 2rem;
     border-top: var(--border-soft);
     text-align: center;
-
-    @media (min-width: 768px) {
-      flex-direction: row;
-      text-align: left;
-    }
   }
 
   .footer__legal {
@@ -524,6 +470,21 @@ summary {
     line-height: 14px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+  }
+
+  @media (min-width: 768px) {
+    .footer__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .footer__brand {
+      grid-column: span 2;
+    }
+
+    .footer__bottom {
+      flex-direction: row;
+      text-align: left;
+    }
   }
 }
 
@@ -554,13 +515,12 @@ summary {
 }
 
 .section-title {
-  font: var(--type-headline-md);
+  font-family: var(--font-headline);
+  font-weight: 500;
+  font-size: var(--display-md);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
   color: var(--on-surface);
-
-  @media (min-width: 768px) {
-    font: var(--type-headline-lg);
-    letter-spacing: -0.015em;
-  }
 }
 
 .section-subtitle {
@@ -593,7 +553,7 @@ summary {
 
 /* ==========================================================================
    9. Buttons
-   Tones: --primary/--secondary/--soft/--quiet. Sizes: default, --sm, --lg.
+   Tones: --primary/--secondary/--soft. Sizes: default, --sm, --lg.
    Widths: --block, --block-sm.
    ========================================================================== */
 .btn {
@@ -799,15 +759,10 @@ summary {
 .products__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-md);
+  gap: clamp(1rem, 2.5vw, 2rem);
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 1024px) {
-    gap: 2rem;
   }
 }
 
@@ -815,7 +770,7 @@ summary {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: var(--space-md);
+  padding: clamp(1rem, 2vw, 1.25rem);
   transition: box-shadow 0.15s ease;
 
   &:hover {
@@ -851,7 +806,7 @@ summary {
 
   .product-card__img {
     width: 100%;
-    height: 11rem;
+    height: clamp(11rem, 8rem + 6vw, 13rem);
     padding: 0.75rem;
     border-radius: var(--radius-md);
     background-color: color-mix(in srgb, var(--surface-container-low) 40%, transparent);
@@ -886,14 +841,6 @@ summary {
     flex-direction: column;
     padding-top: var(--space-sm);
   }
-
-  @media (min-width: 768px) {
-    padding: 1.25rem;
-
-    .product-card__img {
-      height: 13rem;
-    }
-  }
 }
 
 /* ==========================================================================
@@ -901,20 +848,8 @@ summary {
    ========================================================================== */
 .categories__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 768px) {
-    gap: var(--space-md);
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(6, 1fr);
-  }
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 8.5rem), 1fr));
+  gap: clamp(0.75rem, 1.5vw, 1rem);
 }
 
 .category-card {
@@ -966,16 +901,8 @@ summary {
    ========================================================================== */
 .grid-3 {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 1024px) {
-    gap: 2rem;
-  }
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: clamp(1.5rem, 3vw, 2rem);
 }
 
 /* ==========================================================================
@@ -987,38 +914,21 @@ summary {
   gap: 2rem;
   align-items: center;
 
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(12, 1fr);
-    gap: 3rem;
-  }
-
   .hero__content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
-
-    @media (min-width: 768px) {
-      grid-column: span 7;
-    }
   }
 
   .hero__title {
     margin-bottom: 1.25rem;
     color: var(--on-surface);
     font-family: var(--font-headline);
-    font-size: 32px;
+    font-size: var(--display-lg);
     line-height: 1.15;
     font-weight: 400;
     letter-spacing: -0.025em;
-
-    @media (min-width: 640px) {
-      font-size: 40px;
-    }
-
-    @media (min-width: 768px) {
-      font-size: 50px;
-    }
   }
 
   .hero__lead {
@@ -1036,20 +946,11 @@ summary {
     align-items: center;
     gap: var(--space-md);
     width: 100%;
-
-    @media (min-width: 640px) {
-      flex-direction: row;
-      width: auto;
-    }
   }
 
   .hero__media {
     position: relative;
     width: 100%;
-
-    @media (min-width: 768px) {
-      grid-column: span 5;
-    }
   }
 
   .hero__frame {
@@ -1069,10 +970,6 @@ summary {
     border-radius: var(--radius-lg);
     overflow: hidden;
     background-color: var(--surface-container-low);
-
-    @media (min-width: 768px) {
-      aspect-ratio: 5 / 4;
-    }
   }
 
   .hero__img {
@@ -1090,6 +987,30 @@ summary {
     align-items: center;
     justify-content: center;
   }
+
+  @media (min-width: 640px) {
+    .hero__actions {
+      flex-direction: row;
+      width: auto;
+    }
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 3rem;
+
+    .hero__content {
+      grid-column: span 7;
+    }
+
+    .hero__media {
+      grid-column: span 5;
+    }
+
+    .hero__image-wrap {
+      aspect-ratio: 5 / 4;
+    }
+  }
 }
 
 /* ==========================================================================
@@ -1099,6 +1020,7 @@ summary {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: clamp(1.5rem, 3vw, 2rem);
 
   .philosophy-card__top {
     display: flex;
@@ -1127,10 +1049,6 @@ summary {
     font: var(--type-body-md);
     line-height: 1.625;
   }
-
-  @media (min-width: 768px) {
-    padding: 2rem;
-  }
 }
 
 /* ==========================================================================
@@ -1139,6 +1057,7 @@ summary {
 .step {
   display: flex;
   flex-direction: column;
+  padding: clamp(1.5rem, 3vw, 2rem);
 
   .step__num {
     display: flex;
@@ -1168,10 +1087,6 @@ summary {
     font: var(--type-body-md);
     line-height: 1.625;
   }
-
-  @media (min-width: 768px) {
-    padding: 2rem;
-  }
 }
 
 /* ==========================================================================
@@ -1179,30 +1094,18 @@ summary {
    ========================================================================== */
 .about-card {
   border-radius: var(--radius-xl);
-
-  @media (min-width: 768px) {
-    padding: 3rem;
-  }
+  padding: clamp(1.5rem, 4vw, 3rem);
 
   .about__grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
     align-items: center;
-
-    @media (min-width: 768px) {
-      grid-template-columns: repeat(12, 1fr);
-      gap: 3rem;
-    }
   }
 
   .about__media-col {
     display: flex;
     justify-content: center;
-
-    @media (min-width: 768px) {
-      grid-column: span 5;
-    }
   }
 
   .about__media {
@@ -1235,25 +1138,16 @@ summary {
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
-
-    @media (min-width: 768px) {
-      grid-column: span 7;
-    }
   }
 
   .about__name {
     margin-bottom: var(--space-sm);
     color: var(--on-surface);
     font-family: var(--font-headline);
-    font-size: 26px;
-    line-height: 34px;
+    font-size: var(--display-md);
+    line-height: 1.3;
     font-weight: 400;
-
-    @media (min-width: 768px) {
-      font-size: 36px;
-      line-height: 44px;
-      letter-spacing: -0.015em;
-    }
+    letter-spacing: -0.01em;
   }
 
   .about__role {
@@ -1290,9 +1184,20 @@ summary {
   .about__actions {
     width: 100%;
     padding-top: var(--space-md);
+  }
 
-    @media (min-width: 640px) {
-      width: auto;
+  @media (min-width: 768px) {
+    .about__grid {
+      grid-template-columns: repeat(12, 1fr);
+      gap: 3rem;
+    }
+
+    .about__media-col {
+      grid-column: span 5;
+    }
+
+    .about__content {
+      grid-column: span 7;
     }
   }
 }
@@ -1306,16 +1211,12 @@ summary {
   align-items: center;
   max-width: 48rem;
   margin-inline: auto;
-  padding: 2rem;
+  padding: clamp(2rem, 4vw, 3rem);
   border: var(--border);
   border-radius: var(--radius-xl);
   background-color: color-mix(in srgb, var(--secondary-container) 50%, transparent);
   box-shadow: var(--shadow-sm);
   text-align: center;
-
-  @media (min-width: 768px) {
-    padding: 3rem;
-  }
 
   .cta-card__icon {
     display: flex;
@@ -1333,12 +1234,11 @@ summary {
   .cta-card__title {
     margin-bottom: 0.75rem;
     color: var(--on-surface);
-    font: var(--type-headline-md);
-
-    @media (min-width: 768px) {
-      font: var(--type-headline-lg);
-      letter-spacing: -0.015em;
-    }
+    font-family: var(--font-headline);
+    font-weight: 500;
+    font-size: var(--display-md);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
   }
 
   .cta-card__text {
@@ -1363,7 +1263,7 @@ summary {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1.5rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
   border: var(--border);
   border-radius: var(--radius-xl);
   transition: box-shadow 0.15s ease;
@@ -1383,10 +1283,6 @@ summary {
     .path-card__icon {
       background-color: color-mix(in srgb, var(--secondary-container) 60%, transparent);
     }
-  }
-
-  @media (min-width: 768px) {
-    padding: 2rem;
   }
 
   .path-card__ribbon {
@@ -1565,5 +1461,3 @@ summary {
     font-weight: 500;
   }
 }
-
-
