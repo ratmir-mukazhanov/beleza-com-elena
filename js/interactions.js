@@ -6,6 +6,9 @@
 (function () {
   "use strict";
 
+  var contact = (window.DATA && window.DATA.contact) || {};
+  var number = String(contact.phone || "").replace(/\D/g, "");
+
   /* --- Product filter ----------------------------------------------------- */
   var chips = document.querySelectorAll(".chip[data-filter]");
   var cards = document.querySelectorAll(".product-card");
@@ -80,7 +83,7 @@
       "*Preferência de Recomendação:* " + pref;
 
     window.open(
-      "https://wa.me/" + window.DATA.whatsapp + "?text=" + encodeURIComponent(message),
+      "https://wa.me/" + number + "?text=" + encodeURIComponent(message),
       "_blank"
     );
 

@@ -1,20 +1,32 @@
 /**
- * Fills every element carrying a `data-list="<key>"` attribute with markup
- * generated from window.DATA (see data.js).
+ * Fills the page from window.DATA (see data.js).
  *
- * To add a new data-driven list: add the array to data.js, add a template
- * function below, and drop `<div data-list="yourKey"></div>` in the page.
+ *   [data-list="key"]        generated list markup (products, faqs, ...)
+ *   [data-wa="message"]      WhatsApp link; number comes from DATA.contact.phone
+ *   [data-tel]               tel: link; same number as WhatsApp
+ *   [data-phone]             text set to DATA.contact.phone
+ *   [data-instagram]         link set from DATA.contact.instagram
+ *   [data-email]             mailto link set from DATA.contact.email
+ *
+ * So the phone number and social URLs are defined once, in data.js.
+ *
+ * To add a data-driven list: add the array to data.js, add a template below,
+ * and put <div data-list="yourKey"></div> in the page.
  */
 
 (function () {
   "use strict";
 
   var data = window.DATA || {};
+  var contact = data.contact || {};
+  var number = String(contact.phone || "").replace(/\D/g, "");
 
   function wa(message) {
-    return "https://wa.me/" + data.whatsapp + "?text=" + encodeURIComponent(message);
+    var url = "https://wa.me/" + number;
+    return message ? url + "?text=" + encodeURIComponent(message) : url;
   }
 
+  /* --- List templates ----------------------------------------------------- */
   var templates = {
     products: function (items) {
       return items
@@ -64,6 +76,35 @@
     var key = el.getAttribute("data-list");
     if (typeof templates[key] === "function") {
       el.innerHTML = templates[key](data[key] || []);
+    }
+  });
+
+  /* --- Contact & social links -------------------------------------------- */
+  document.querySelectorAll("[data-wa]").forEach(function (el) {
+    el.setAttribute("href", wa(el.getAttribute("data-wa")));
+  });
+
+  document.querySelectorAll("[data-tel]").forEach(function (el) {
+    el.setAttribute("href", "tel:" + number);
+  });
+
+  document.querySelectorAll("[data-phone]").forEach(function (el) {
+    el.textContent = contact.phone || "";
+  });
+
+  document.querySelectorAll("[data-instagram]").forEach(function (el) {
+    if (contact.instagram) {
+      el.setAttribute("href", contact.instagram);
+    } else {
+      el.hidden = true;
+    }
+  });
+
+  document.querySelectorAll("[data-email]").forEach(function (el) {
+    if (contact.email) {
+      el.setAttribute("href", "mailto:" + contact.email);
+    } else {
+      el.hidden = true;
     }
   });
 })();
