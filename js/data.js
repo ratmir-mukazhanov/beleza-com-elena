@@ -72,6 +72,84 @@ window.DATA = {
     },
   ],
 
+  categories: [
+    {
+      icon: "auto_awesome",
+      title: "Cuidados da pele",
+      desc: "Tónicos, essências e protetores solares.",
+      message: "Gostaria de conhecer os produtos para Cuidados da Pele.",
+    },
+    {
+      icon: "clean_hands",
+      title: "Higiene oral",
+      desc: "Pastas com própolis e escovas suaves.",
+      message: "Gostaria de conhecer os produtos de Higiene Oral.",
+    },
+    {
+      icon: "shower",
+      title: "Cabelo",
+      desc: "Shampoos botânicos e cuidados nutritivos.",
+      message: "Gostaria de conhecer os produtos para Cabelo.",
+    },
+    {
+      icon: "soap",
+      title: "Cuidados pessoais",
+      desc: "Sabonetes e loções corporais suaves.",
+      message: "Gostaria de conhecer os produtos de Cuidados Pessoais.",
+    },
+    {
+      icon: "energy_savings_leaf",
+      title: "Saúde & bem-estar",
+      desc: "Infusões, extratos e suplementos puros.",
+      message: "Gostaria de conhecer os produtos de Saúde e Bem-estar.",
+    },
+    {
+      icon: "face",
+      title: "Homem",
+      desc: "Cuidados práticos para barbear e pele.",
+      message: "Gostaria de conhecer os produtos para Homem.",
+    },
+  ],
+
+  philosophy: [
+    {
+      num: "01",
+      icon: "biotech",
+      title: "Inovação Coreana",
+      desc: "Investigação científica avançada combinada harmoniosamente com extratos botânicos ancestrais asiáticos.",
+    },
+    {
+      num: "02",
+      icon: "verified",
+      title: "Qualidade e Consistência",
+      desc: "Produção certificada internacionalmente com padrões rigorosos de pureza e formulações dermatologicamente testadas.",
+    },
+    {
+      num: "03",
+      icon: "spa",
+      title: "Para o Dia a Dia",
+      desc: "Formulado para integrar a sua rotina diária de forma simples, leve e com momentos autênticos de calma e prazer.",
+    },
+  ],
+
+  steps: [
+    {
+      num: "1",
+      title: "Passo 01: Escolha",
+      desc: "Explore os produtos e encontre aquilo que procura para a sua rotina de cuidados diários ou solicite recomendações.",
+    },
+    {
+      num: "2",
+      title: "Passo 02: Pergunte",
+      desc: "Envie-me uma mensagem no WhatsApp se tiver dúvidas sobre textura, modo de aplicação, tipo de pele ou ingredientes.",
+    },
+    {
+      num: "3",
+      title: "Passo 03: Encomende",
+      desc: "Explico-lhe como encomendar os produtos de forma segura e direta com envio oficial para qualquer morada em Portugal.",
+    },
+  ],
+
   faqs: [
     {
       q: "Preciso de ser membro para comprar?",

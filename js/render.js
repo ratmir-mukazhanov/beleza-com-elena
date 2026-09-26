@@ -1,9 +1,8 @@
 /**
  * Renders the page from window.DATA (js/data.js) and wires the interactions.
  *
- *   [data-list="key"]     generated list markup (products, faqs)
+ *   [data-list="key"]     generated list markup (see templates below)
  *   [data-wa="message"]   WhatsApp link; number comes from DATA.contact.phone
- *   [data-tel]            tel: link; same number as WhatsApp
  *   [data-phone]          element text set to DATA.contact.phone
  *
  * The phone number is defined once, in data.js. To add a data-driven list:
@@ -29,7 +28,7 @@
       return items
         .map(function (p) {
           return (
-            '<article class="product-card" data-category="' + p.category + '">' +
+            '<article class="product-card card" data-category="' + p.category + '">' +
               '<div class="product-card__head">' +
                 '<div class="product-card__tag-row">' +
                   '<span class="product-card__tag">' + p.tag + "</span>" +
@@ -52,11 +51,60 @@
         .join("");
     },
 
+    categories: function (items) {
+      return items
+        .map(function (c) {
+          return (
+            '<a class="category-card card" data-wa="' + c.message + '" rel="noopener noreferrer" target="_blank">' +
+              '<div class="category-card__icon"><span class="material-symbols-outlined icon icon--xl">' + c.icon + "</span></div>" +
+              "<div>" +
+                '<h3 class="category-card__title">' + c.title + "</h3>" +
+                '<p class="category-card__desc">' + c.desc + "</p>" +
+              "</div>" +
+            "</a>"
+          );
+        })
+        .join("");
+    },
+
+    philosophy: function (items) {
+      return items
+        .map(function (p) {
+          return (
+            '<div class="philosophy-card card">' +
+              '<div class="philosophy-card__top">' +
+                '<span class="philosophy-card__num">' + p.num + "</span>" +
+                '<span class="material-symbols-outlined icon icon--xl philosophy-card__icon">' + p.icon + "</span>" +
+              "</div>" +
+              "<div>" +
+                '<h3 class="philosophy-card__title">' + p.title + "</h3>" +
+                '<p class="philosophy-card__desc">' + p.desc + "</p>" +
+              "</div>" +
+            "</div>"
+          );
+        })
+        .join("");
+    },
+
+    steps: function (items) {
+      return items
+        .map(function (s) {
+          return (
+            '<div class="step card">' +
+              '<div class="step__num">' + s.num + "</div>" +
+              '<h3 class="step__title">' + s.title + "</h3>" +
+              '<p class="step__desc">' + s.desc + "</p>" +
+            "</div>"
+          );
+        })
+        .join("");
+    },
+
     faqs: function (items) {
       return items
         .map(function (f) {
           return (
-            '<details class="faq-item">' +
+            '<details class="faq-item card">' +
               '<summary class="faq-item__question">' +
                 "<span>" + f.q + "</span>" +
                 '<span class="material-symbols-outlined icon faq-item__icon">expand_more</span>' +
@@ -81,10 +129,6 @@
     el.setAttribute("href", wa(el.getAttribute("data-wa")));
   });
 
-  document.querySelectorAll("[data-tel]").forEach(function (el) {
-    el.setAttribute("href", "tel:" + number);
-  });
-
   document.querySelectorAll("[data-phone]").forEach(function (el) {
     el.textContent = contact.phone || "";
   });
@@ -106,67 +150,5 @@
         card.style.display = matches ? "flex" : "none";
       });
     });
-  });
-
-  /* --- Skin assessment modal ---------------------------------------------- */
-  var modal = document.getElementById("skin-quiz-modal");
-  var form = document.getElementById("skin-assessment-form");
-  if (!modal || !form) {
-    return;
-  }
-
-  function open() {
-    modal.hidden = false;
-    document.body.classList.add("is-modal-open");
-  }
-
-  function close() {
-    modal.hidden = true;
-    document.body.classList.remove("is-modal-open");
-  }
-
-  document.querySelectorAll("[data-open-skin-quiz]").forEach(function (trigger) {
-    trigger.addEventListener("click", function (event) {
-      event.preventDefault();
-      open();
-    });
-  });
-
-  modal.querySelectorAll("[data-close-skin-quiz]").forEach(function (trigger) {
-    trigger.addEventListener("click", close);
-  });
-
-  modal.addEventListener("click", function (event) {
-    if (event.target === modal) close();
-  });
-
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && !modal.hidden) close();
-  });
-
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    var name = document.getElementById("quiz-name").value;
-    var phone = document.getElementById("quiz-phone").value;
-    var skinInput = document.querySelector('input[name="skinType"]:checked');
-    var skinType = skinInput ? skinInput.value : "Não especificado";
-    var goal = document.getElementById("quiz-goal").value;
-    var pref = document.getElementById("quiz-pref").value;
-
-    var message =
-      "Olá Elena! Fiz a Avaliação de Cuidados da Pele Atomy no website:\n\n" +
-      "*Nome:* " + name + "\n" +
-      "*Contacto:* " + phone + "\n" +
-      "*Tipo de Pele:* " + skinType + "\n" +
-      "*Principal Objetivo:* " + goal + "\n" +
-      "*Preferência de Recomendação:* " + pref;
-
-    window.open(
-      "https://wa.me/" + number + "?text=" + encodeURIComponent(message),
-      "_blank"
-    );
-
-    close();
   });
 })();
