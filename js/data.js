@@ -189,16 +189,16 @@ window.DATA = {
       a: "Escolha os produtos que quer e fale comigo por WhatsApp. Confirmo a disponibilidade e combinamos os detalhes.",
     },
     {
-      q: "Faz envios para todo o país?",
-      a: "Sim, envio para Portugal Continental e Ilhas. Os portes e o prazo dependem da transportadora e são combinados consigo.",
+      q: "Quanto custa o envio?",
+      a: "Depende do peso e da sua localização. Digo-lhe o valor exato antes de enviar.",
     },
     {
       q: "Quanto tempo demora a entrega?",
-      a: "Depende da transportadora e da sua localização. Indico-lhe uma estimativa quando fizer a encomenda.",
+      a: "Depende da transportadora. Indico-lhe uma estimativa quando fizer a encomenda.",
     },
     {
-      q: "Posso pagar diretamente a si?",
-      a: "Sim. Falamos por WhatsApp e combinamos o método de pagamento mais prático para si.",
+      q: "Como se faz o pagamento?",
+      a: "Falamos por WhatsApp e combinamos o método que for mais prático para si.",
     },
     {
       q: "E se precisar de ajuda a escolher?",
