@@ -61,26 +61,9 @@
     });
   }
 
-  /* --- Smooth scrolling for in-page anchors ------------------------------- */
-  function scrollToTarget(target) {
-    var top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset();
-    window.scrollTo({ top: top < 0 ? 0 : top, behavior: reduceMotion ? "auto" : "smooth" });
-  }
-
+  /* --- In-page anchors: just close the mobile menu ------------------------ */
   document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-    var hash = link.getAttribute("href");
-    if (!hash || hash === "#") return;
-
-    link.addEventListener("click", function (e) {
-      var target = document.querySelector(hash);
-      if (!target) return;
-
-      e.preventDefault();
-      closeNav();
-      scrollToTarget(target);
-
-      if (history.pushState) history.pushState(null, "", hash);
-    });
+    link.addEventListener("click", closeNav);
   });
 
   /* --- Scroll spy: highlight the section in view -------------------------- */
@@ -139,7 +122,7 @@
   /* --- Reveal on scroll --------------------------------------------------- */
   var revealTargets = document.querySelectorAll(
     ".section-header, .product-card, .category-card, .philosophy-card, .step, " +
-      ".path-card, .faq-item, .about-card, .cta-card, .disclaimer"
+      ".path-card, .faq-item, .about-card, .cta-card"
   );
 
   if (!reduceMotion && "IntersectionObserver" in window) {
