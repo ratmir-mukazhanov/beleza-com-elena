@@ -2,12 +2,12 @@
  * UI behaviour for the landing page.
  *
  *   - mobile navigation (hamburger + animated panel)
- *   - smooth, header-aware scrolling for in-page anchors
+ *   - in-page anchor scrolling
  *   - scroll spy: highlights the section currently in view
  *   - product category filters
  *   - reveal-on-scroll animations
  *
- * Runs after js/render.js, so generated lists already exist in the DOM.
+ * Runs after js/render.js.
  */
 
 (function () {
@@ -16,8 +16,11 @@
   var header = document.querySelector(".site-header");
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function headerOffset() {
-    return (header ? header.offsetHeight : 0) + 8;
+  function activationLine() {
+    var headerHeight = header ? header.offsetHeight : 0;
+    var pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
+    if (isNaN(pad)) pad = headerHeight + 20;
+    return pad + 8;
   }
 
   /* --- Mobile navigation -------------------------------------------------- */
@@ -61,7 +64,7 @@
     });
   }
 
-  /* --- In-page anchors: just close the mobile menu ------------------------ */
+  /* --- In-page anchors ---------------------------------------------------- */
   document.querySelectorAll('a[href^="#"]').forEach(function (link) {
     link.addEventListener("click", closeNav);
   });
@@ -78,11 +81,11 @@
 
   if (spySections.length) {
     var updateActive = function () {
-      var offset = headerOffset();
+      var line = activationLine();
       var current = null;
 
       spySections.forEach(function (item) {
-        if (item.section.getBoundingClientRect().top <= offset) current = item;
+        if (item.section.getBoundingClientRect().top <= line) current = item;
       });
 
       var atBottom =
