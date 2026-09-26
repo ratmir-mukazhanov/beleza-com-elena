@@ -173,18 +173,6 @@ summary {
   padding-top: env(safe-area-inset-top, 0px);
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 :focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
@@ -264,8 +252,7 @@ summary {
   }
 }
 
-.section--cta,
-.section--faq {
+.section--cta {
   padding-block: 2.5rem;
 
   @media (min-width: 768px) {
@@ -274,6 +261,8 @@ summary {
 }
 
 .section--faq {
+  padding-block: 2.5rem;
+
   @media (min-width: 768px) {
     padding-block: 4rem;
   }
@@ -650,23 +639,11 @@ summary {
 .btn--soft {
   background-color: var(--surface-container-low);
   color: var(--on-surface);
-  border-color: color-mix(in srgb, var(--outline-variant) 30%, transparent);
+  border: var(--border);
   box-shadow: none;
 
   &:hover {
     background-color: var(--surface-container-high);
-  }
-}
-
-.btn--quiet {
-  padding: 0.625rem 1rem;
-  background-color: transparent;
-  color: var(--secondary);
-  box-shadow: none;
-  font: var(--type-label-md);
-
-  &:hover {
-    background-color: var(--surface-container-low);
   }
 }
 
